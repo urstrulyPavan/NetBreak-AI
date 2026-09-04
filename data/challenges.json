@@ -1,0 +1,872 @@
+[
+  {
+    "id": "ip_01",
+    "title": "The Closed Door",
+    "difficulty": "Beginner",
+    "topic": "Interfaces",
+    "description": "The LAN interface is shut down.",
+    "symptom": "PC1 cannot reach its gateway.",
+    "topology": "PC1 \u2500\u2500 SW1 \u2500\u2500 R1 G0/0",
+    "device": "R1",
+    "hidden_fault": "G0/0 is administratively down.",
+    "root_cause": "The LAN interface is shut down.",
+    "expected_evidence": [
+      "G0/0 is administratively down",
+      "The"
+    ],
+    "expected_commands": [
+      "show ip interface brief"
+    ],
+    "expected_fix_keywords": [
+      "no shutdown"
+    ],
+    "verification_command": "show ip interface brief",
+    "learning_objective": "Learn how to systematically troubleshoot interfaces failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the interfaces layer instead of changing configuration immediately.",
+      "Use `show ip interface brief` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "ip_02",
+    "title": "The Wrong Exit Sign",
+    "difficulty": "Beginner",
+    "topic": "IP Addressing",
+    "description": "The default gateway is outside the host subnet.",
+    "symptom": "PC1 cannot reach remote networks.",
+    "topology": "PC1 192.168.1.10/24 \u2500\u2500 SW1 \u2500\u2500 R1 192.168.1.1",
+    "device": "PC1",
+    "hidden_fault": "Gateway is 192.168.2.1 instead of 192.168.1.1.",
+    "root_cause": "The default gateway is outside the host subnet.",
+    "expected_evidence": [
+      "Gateway is 192",
+      "The"
+    ],
+    "expected_commands": [
+      "ipconfig /all"
+    ],
+    "expected_fix_keywords": [
+      "192.168.1.1"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot ip addressing failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the ip addressing layer instead of changing configuration immediately.",
+      "Use `ipconfig /all` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "ip_03",
+    "title": "The Duplicate Address",
+    "difficulty": "Beginner",
+    "topic": "IP Addressing",
+    "description": "Duplicate IP addresses conflict in ARP.",
+    "symptom": "Connectivity is intermittent.",
+    "topology": "PC1 \u2500\u2500 SW1 \u2500\u2500 PC2",
+    "device": "SW1",
+    "hidden_fault": "PC1 and PC2 both use 192.168.1.10.",
+    "root_cause": "Duplicate IP addresses conflict in ARP.",
+    "expected_evidence": [
+      "PC1 and PC2 both use 192",
+      "Duplicate"
+    ],
+    "expected_commands": [
+      "show arp"
+    ],
+    "expected_fix_keywords": [
+      "192.168.1.11"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot ip addressing failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the ip addressing layer instead of changing configuration immediately.",
+      "Use `show arp` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "ip_04",
+    "title": "The Wrong Mask",
+    "difficulty": "Beginner",
+    "topic": "Subnetting",
+    "description": "The subnet mask defines the wrong local network.",
+    "symptom": "A nearby host is treated as remote.",
+    "topology": "PC1 \u2500\u2500 SW1 \u2500\u2500 PC2",
+    "device": "PC1",
+    "hidden_fault": "PC1 uses /30 instead of /24.",
+    "root_cause": "The subnet mask defines the wrong local network.",
+    "expected_evidence": [
+      "PC1 uses /30 instead of /24",
+      "The"
+    ],
+    "expected_commands": [
+      "ipconfig /all"
+    ],
+    "expected_fix_keywords": [
+      "255.255.255.0"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot subnetting failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the subnetting layer instead of changing configuration immediately.",
+      "Use `ipconfig /all` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "ip_05",
+    "title": "The Silent Cable",
+    "difficulty": "Beginner",
+    "topic": "Interfaces",
+    "description": "The access port has no active link.",
+    "symptom": "The PC has no connectivity.",
+    "topology": "PC1 \u2500\u2500 Fa0/1 SW1",
+    "device": "SW1",
+    "hidden_fault": "Fa0/1 is down.",
+    "root_cause": "The access port has no active link.",
+    "expected_evidence": [
+      "Fa0/1 is down",
+      "The"
+    ],
+    "expected_commands": [
+      "show interfaces fa0/1 status"
+    ],
+    "expected_fix_keywords": [
+      "no shutdown"
+    ],
+    "verification_command": "show interfaces fa0/1 status",
+    "learning_objective": "Learn how to systematically troubleshoot interfaces failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the interfaces layer instead of changing configuration immediately.",
+      "Use `show interfaces fa0/1 status` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "vlan_01",
+    "title": "The Wrong Door",
+    "difficulty": "Beginner",
+    "topic": "VLAN",
+    "description": "The access port belongs to the wrong VLAN.",
+    "symptom": "Two hosts should communicate but cannot.",
+    "topology": "PC1 \u2500\u2500 SW1 \u2500\u2500 PC2",
+    "device": "SW1",
+    "hidden_fault": "Fa0/1 is in VLAN 20 instead of VLAN 10.",
+    "root_cause": "The access port belongs to the wrong VLAN.",
+    "expected_evidence": [
+      "Fa0/1 is in VLAN 20 instead of VLAN 10",
+      "The"
+    ],
+    "expected_commands": [
+      "show vlan brief"
+    ],
+    "expected_fix_keywords": [
+      "switchport access vlan 10"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot vlan failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the vlan layer instead of changing configuration immediately.",
+      "Use `show vlan brief` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "vlan_02",
+    "title": "The Missing VLAN",
+    "difficulty": "Beginner",
+    "topic": "VLAN",
+    "description": "The switch has no VLAN 30 definition.",
+    "symptom": "A required VLAN cannot be assigned.",
+    "topology": "PC1 \u2500\u2500 SW1",
+    "device": "SW1",
+    "hidden_fault": "VLAN 30 does not exist.",
+    "root_cause": "The switch has no VLAN 30 definition.",
+    "expected_evidence": [
+      "VLAN 30 does not exist",
+      "The"
+    ],
+    "expected_commands": [
+      "show vlan brief"
+    ],
+    "expected_fix_keywords": [
+      "vlan 30"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot vlan failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the vlan layer instead of changing configuration immediately.",
+      "Use `show vlan brief` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "vlan_03",
+    "title": "The Trunk Gate",
+    "difficulty": "Beginner",
+    "topic": "Trunking",
+    "description": "The trunk does not carry VLAN 10.",
+    "symptom": "VLAN 10 fails across two switches.",
+    "topology": "SW1 \u2550\u2550\u2550 trunk \u2550\u2550\u2550 SW2",
+    "device": "SW1",
+    "hidden_fault": "VLAN 10 is not allowed on the trunk.",
+    "root_cause": "The trunk does not carry VLAN 10.",
+    "expected_evidence": [
+      "VLAN 10 is not allowed on the trunk",
+      "The"
+    ],
+    "expected_commands": [
+      "show interfaces trunk"
+    ],
+    "expected_fix_keywords": [
+      "allowed vlan 10"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot trunking failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the trunking layer instead of changing configuration immediately.",
+      "Use `show interfaces trunk` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "route_01",
+    "title": "The Missing Road",
+    "difficulty": "Beginner",
+    "topic": "Routing",
+    "description": "The routing table lacks the destination network.",
+    "symptom": "PC reaches its gateway but not the remote server.",
+    "topology": "PC1 \u2500\u2500 R1 \u2550\u2550\u2550 R2 \u2500\u2500 Server",
+    "device": "R1",
+    "hidden_fault": "No route to 10.10.20.0/24.",
+    "root_cause": "The routing table lacks the destination network.",
+    "expected_evidence": [
+      "No route to 10",
+      "The"
+    ],
+    "expected_commands": [
+      "show ip route"
+    ],
+    "expected_fix_keywords": [
+      "ip route 10.10.20.0"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot routing failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the routing layer instead of changing configuration immediately.",
+      "Use `show ip route` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "route_02",
+    "title": "The Wrong Turn",
+    "difficulty": "Beginner",
+    "topic": "Routing",
+    "description": "The next-hop address is wrong.",
+    "symptom": "Traffic leaves R1 but never reaches the server.",
+    "topology": "R1 \u2500\u2500 R2 \u2500\u2500 Server",
+    "device": "R1",
+    "hidden_fault": "Static route points to 192.168.2.99.",
+    "root_cause": "The next-hop address is wrong.",
+    "expected_evidence": [
+      "Static route points to 192",
+      "The"
+    ],
+    "expected_commands": [
+      "show ip route"
+    ],
+    "expected_fix_keywords": [
+      "192.168.2.2"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot routing failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the routing layer instead of changing configuration immediately.",
+      "Use `show ip route` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "route_03",
+    "title": "The Missing Exit",
+    "difficulty": "Beginner",
+    "topic": "Routing",
+    "description": "Unknown destinations have no fallback path.",
+    "symptom": "Local resources work but unknown destinations fail.",
+    "topology": "PC1 \u2500\u2500 R1 \u2500\u2500 ISP",
+    "device": "R1",
+    "hidden_fault": "No default route exists.",
+    "root_cause": "Unknown destinations have no fallback path.",
+    "expected_evidence": [
+      "No default route exists",
+      "Unknown"
+    ],
+    "expected_commands": [
+      "show ip route"
+    ],
+    "expected_fix_keywords": [
+      "0.0.0.0/0"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot routing failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the routing layer instead of changing configuration immediately.",
+      "Use `show ip route` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "int_01",
+    "title": "The Broken Neighbor",
+    "difficulty": "Beginner",
+    "topic": "Interfaces",
+    "description": "The two ends are on different IP networks.",
+    "symptom": "The router-to-router link cannot pass IP traffic.",
+    "topology": "R1 \u2550\u2550\u2550 R2",
+    "device": "R1",
+    "hidden_fault": "R1 uses 192.168.3.1 while R2 uses 192.168.2.2.",
+    "root_cause": "The two ends are on different IP networks.",
+    "expected_evidence": [
+      "R1 uses 192",
+      "The"
+    ],
+    "expected_commands": [
+      "show ip interface brief"
+    ],
+    "expected_fix_keywords": [
+      "192.168.2.1"
+    ],
+    "verification_command": "show ip interface brief",
+    "learning_objective": "Learn how to systematically troubleshoot interfaces failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the interfaces layer instead of changing configuration immediately.",
+      "Use `show ip interface brief` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "dhcp_01",
+    "title": "No Address at the Desk",
+    "difficulty": "Beginner",
+    "topic": "DHCP",
+    "description": "DHCP broadcasts are not forwarded to the remote server.",
+    "symptom": "PC1 receives 169.254.x.x.",
+    "topology": "PC1 \u2500\u2500 R1 \u2500\u2500 DHCP Server",
+    "device": "R1",
+    "hidden_fault": "DHCP relay/helper is missing.",
+    "root_cause": "DHCP broadcasts are not forwarded to the remote server.",
+    "expected_evidence": [
+      "DHCP relay/helper is missing",
+      "DHCP"
+    ],
+    "expected_commands": [
+      "ipconfig /all"
+    ],
+    "expected_fix_keywords": [
+      "ip helper-address"
+    ],
+    "verification_command": "ipconfig /all",
+    "learning_objective": "Learn how to systematically troubleshoot dhcp failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the dhcp layer instead of changing configuration immediately.",
+      "Use `ipconfig /all` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "dns_01",
+    "title": "The Name Problem",
+    "difficulty": "Beginner",
+    "topic": "DNS",
+    "description": "Name resolution is configured incorrectly.",
+    "symptom": "Server IP works but hostname resolution fails.",
+    "topology": "PC1 \u2500\u2500 R1 \u2500\u2500 DNS/Web Server",
+    "device": "PC1",
+    "hidden_fault": "Wrong DNS server is configured.",
+    "root_cause": "Name resolution is configured incorrectly.",
+    "expected_evidence": [
+      "Wrong DNS server is configured",
+      "Name"
+    ],
+    "expected_commands": [
+      "nslookup server.example.local"
+    ],
+    "expected_fix_keywords": [
+      "10.10.20.53"
+    ],
+    "verification_command": "nslookup server.example.local",
+    "learning_objective": "Learn how to systematically troubleshoot dns failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the dns layer instead of changing configuration immediately.",
+      "Use `nslookup server.example.local` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "mix_01",
+    "title": "Two Wrong Turns",
+    "difficulty": "Beginner",
+    "topic": "Mixed",
+    "description": "Two independent mistakes compound one symptom.",
+    "symptom": "Client cannot reach its gateway.",
+    "topology": "PC1 \u2500\u2500 SW1 \u2500\u2500 R1",
+    "device": "PC1/SW1",
+    "hidden_fault": "Wrong VLAN and wrong gateway both exist.",
+    "root_cause": "Two independent mistakes compound one symptom.",
+    "expected_evidence": [
+      "Wrong VLAN and wrong gateway both exist",
+      "Two"
+    ],
+    "expected_commands": [
+      "show vlan brief"
+    ],
+    "expected_fix_keywords": [
+      "vlan 10 + 192.168.1.1"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot mixed failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the mixed layer instead of changing configuration immediately.",
+      "Use `show vlan brief` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "acl_01",
+    "title": "The Security Guard",
+    "difficulty": "Intermediate",
+    "topic": "ACL",
+    "description": "A security policy blocks otherwise valid traffic.",
+    "symptom": "Client reaches router but not server.",
+    "topology": "PC1 \u2500\u2500 R1 \u2500\u2500 R2 \u2500\u2500 Server",
+    "device": "R1",
+    "hidden_fault": "ACL denies client subnet to server subnet.",
+    "root_cause": "A security policy blocks otherwise valid traffic.",
+    "expected_evidence": [
+      "ACL denies client subnet to server subnet",
+      "A"
+    ],
+    "expected_commands": [
+      "show access-lists"
+    ],
+    "expected_fix_keywords": [
+      "no access-list 100"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot acl failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the acl layer instead of changing configuration immediately.",
+      "Use `show access-lists` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "acl_02",
+    "title": "The Blocked Ping",
+    "difficulty": "Intermediate",
+    "topic": "ACL",
+    "description": "Only the diagnostic protocol is blocked.",
+    "symptom": "Ping fails while web traffic works.",
+    "topology": "PC1 \u2500\u2500 R1 \u2500\u2500 Server",
+    "device": "R1",
+    "hidden_fault": "ACL denies ICMP.",
+    "root_cause": "Only the diagnostic protocol is blocked.",
+    "expected_evidence": [
+      "ACL denies ICMP",
+      "Only"
+    ],
+    "expected_commands": [
+      "show access-lists"
+    ],
+    "expected_fix_keywords": [
+      "permit icmp"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot acl failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the acl layer instead of changing configuration immediately.",
+      "Use `show access-lists` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "acl_03",
+    "title": "The Hidden Rule",
+    "difficulty": "Intermediate",
+    "topic": "ACL",
+    "description": "ACLs are processed top-to-bottom.",
+    "symptom": "A valid permit never takes effect.",
+    "topology": "PC1 \u2500\u2500 R1 \u2500\u2500 Server",
+    "device": "R1",
+    "hidden_fault": "Broad deny appears before specific permit.",
+    "root_cause": "ACLs are processed top-to-bottom.",
+    "expected_evidence": [
+      "Broad deny appears before specific permit",
+      "ACLs"
+    ],
+    "expected_commands": [
+      "show access-lists"
+    ],
+    "expected_fix_keywords": [
+      "remove deny"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot acl failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the acl layer instead of changing configuration immediately.",
+      "Use `show access-lists` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "acl_04",
+    "title": "The Wrong Direction",
+    "difficulty": "Intermediate",
+    "topic": "ACL",
+    "description": "ACL placement and direction determine which packets are evaluated.",
+    "symptom": "Expected traffic is filtered unexpectedly.",
+    "topology": "PC1 \u2500\u2500 R1 \u2500\u2500 Server",
+    "device": "R1",
+    "hidden_fault": "ACL is applied on the wrong interface/direction.",
+    "root_cause": "ACL placement and direction determine which packets are evaluated.",
+    "expected_evidence": [
+      "ACL is applied on the wrong interface/direction",
+      "ACL"
+    ],
+    "expected_commands": [
+      "show ip interface"
+    ],
+    "expected_fix_keywords": [
+      "no ip access-group"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot acl failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the acl layer instead of changing configuration immediately.",
+      "Use `show ip interface` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "vlan_04",
+    "title": "The Native Mismatch",
+    "difficulty": "Intermediate",
+    "topic": "Trunking",
+    "description": "Trunk endpoints disagree on the untagged VLAN.",
+    "symptom": "Trunk is up but native VLAN behavior is inconsistent.",
+    "topology": "SW1 \u2550\u2550\u2550 trunk \u2550\u2550\u2550 SW2",
+    "device": "SW1",
+    "hidden_fault": "Native VLAN is 99 on one end and 1 on the other.",
+    "root_cause": "Trunk endpoints disagree on the untagged VLAN.",
+    "expected_evidence": [
+      "Native VLAN is 99 on one end and 1 on the other",
+      "Trunk"
+    ],
+    "expected_commands": [
+      "show interfaces trunk"
+    ],
+    "expected_fix_keywords": [
+      "native vlan 1"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot trunking failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the trunking layer instead of changing configuration immediately.",
+      "Use `show interfaces trunk` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "vlan_05",
+    "title": "The Uninvited VLAN",
+    "difficulty": "Intermediate",
+    "topic": "Trunking",
+    "description": "The trunk's allowed VLAN list is wrong.",
+    "symptom": "Required VLAN fails across the trunk.",
+    "topology": "SW1 \u2550\u2550\u2550 trunk \u2550\u2550\u2550 SW2",
+    "device": "SW1",
+    "hidden_fault": "VLAN 30 is missing from allowed list.",
+    "root_cause": "The trunk's allowed VLAN list is wrong.",
+    "expected_evidence": [
+      "VLAN 30 is missing from allowed list",
+      "The"
+    ],
+    "expected_commands": [
+      "show interfaces trunk"
+    ],
+    "expected_fix_keywords": [
+      "allowed vlan 30"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot trunking failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the trunking layer instead of changing configuration immediately.",
+      "Use `show interfaces trunk` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "route_04",
+    "title": "The Floating Route",
+    "difficulty": "Intermediate",
+    "topic": "Routing",
+    "description": "Lower administrative distance wins route selection.",
+    "symptom": "Traffic uses an unexpected path.",
+    "topology": "R1 \u2500 R2 \u2500 Server / R1 \u2500 R3 \u2500 Server",
+    "device": "R1",
+    "hidden_fault": "Preferred route has administrative distance 200.",
+    "root_cause": "Lower administrative distance wins route selection.",
+    "expected_evidence": [
+      "Preferred route has administrative distance 200",
+      "Lower"
+    ],
+    "expected_commands": [
+      "show ip route"
+    ],
+    "expected_fix_keywords": [
+      "administrative distance"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot routing failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the routing layer instead of changing configuration immediately.",
+      "Use `show ip route` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "route_05",
+    "title": "The Looping Map",
+    "difficulty": "Intermediate",
+    "topic": "Routing",
+    "description": "Incorrect forwarding creates a routing loop.",
+    "symptom": "Traffic loops between routers.",
+    "topology": "PC1 \u2500 R1 \u2500 R2 \u2500 Server",
+    "device": "R1",
+    "hidden_fault": "Static route points toward the wrong next hop.",
+    "root_cause": "Incorrect forwarding creates a routing loop.",
+    "expected_evidence": [
+      "Static route points toward the wrong next hop",
+      "Incorrect"
+    ],
+    "expected_commands": [
+      "traceroute 10.10.20.10"
+    ],
+    "expected_fix_keywords": [
+      "192.168.2.2"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot routing failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the routing layer instead of changing configuration immediately.",
+      "Use `traceroute 10.10.20.10` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "route_06",
+    "title": "The Disconnected Network",
+    "difficulty": "Intermediate",
+    "topic": "Routing",
+    "description": "A configured next hop must be reachable.",
+    "symptom": "Route exists but its next hop is unreachable.",
+    "topology": "R1 \u2500 R2 \u2500 Server",
+    "device": "R1",
+    "hidden_fault": "Next hop 192.168.99.2 is not reachable.",
+    "root_cause": "A configured next hop must be reachable.",
+    "expected_evidence": [
+      "Next hop 192",
+      "A"
+    ],
+    "expected_commands": [
+      "show ip route"
+    ],
+    "expected_fix_keywords": [
+      "192.168.2.2"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot routing failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the routing layer instead of changing configuration immediately.",
+      "Use `show ip route` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "int_02",
+    "title": "The Speed Trap",
+    "difficulty": "Intermediate",
+    "topic": "Interfaces",
+    "description": "Duplex mismatch causes errors/collisions.",
+    "symptom": "Link is up but errors and poor performance occur.",
+    "topology": "SW1 \u2550\u2550\u2550 R1",
+    "device": "SW1",
+    "hidden_fault": "One end is half-duplex and the other full-duplex.",
+    "root_cause": "Duplex mismatch causes errors/collisions.",
+    "expected_evidence": [
+      "One end is half-duplex and the other full-duplex",
+      "Duplex"
+    ],
+    "expected_commands": [
+      "show interfaces fa0/1"
+    ],
+    "expected_fix_keywords": [
+      "duplex auto"
+    ],
+    "verification_command": "show interfaces fa0/1",
+    "learning_objective": "Learn how to systematically troubleshoot interfaces failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the interfaces layer instead of changing configuration immediately.",
+      "Use `show interfaces fa0/1` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "dhcp_02",
+    "title": "The Empty Pool",
+    "difficulty": "Intermediate",
+    "topic": "DHCP",
+    "description": "The address pool is exhausted.",
+    "symptom": "New clients cannot obtain an address.",
+    "topology": "PC1 \u2500 SW1 \u2500 R1 \u2500 DHCP",
+    "device": "DHCP Server",
+    "hidden_fault": "DHCP pool has zero available addresses.",
+    "root_cause": "The address pool is exhausted.",
+    "expected_evidence": [
+      "DHCP pool has zero available addresses",
+      "The"
+    ],
+    "expected_commands": [
+      "show ip dhcp pool"
+    ],
+    "expected_fix_keywords": [
+      "expand pool"
+    ],
+    "verification_command": "show ip dhcp pool",
+    "learning_objective": "Learn how to systematically troubleshoot dhcp failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the dhcp layer instead of changing configuration immediately.",
+      "Use `show ip dhcp pool` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "dhcp_03",
+    "title": "The Wrong Pool",
+    "difficulty": "Intermediate",
+    "topic": "DHCP",
+    "description": "DHCP supplies an incorrect gateway.",
+    "symptom": "Client receives an address but cannot reach its gateway.",
+    "topology": "PC1 \u2500 SW1 \u2500 R1 \u2500 DHCP",
+    "device": "DHCP Server",
+    "hidden_fault": "Pool supplies wrong default-router.",
+    "root_cause": "DHCP supplies an incorrect gateway.",
+    "expected_evidence": [
+      "Pool supplies wrong default-router",
+      "DHCP"
+    ],
+    "expected_commands": [
+      "ipconfig /all"
+    ],
+    "expected_fix_keywords": [
+      "default-router 192.168.1.1"
+    ],
+    "verification_command": "ipconfig /all",
+    "learning_objective": "Learn how to systematically troubleshoot dhcp failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the dhcp layer instead of changing configuration immediately.",
+      "Use `ipconfig /all` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "dns_02",
+    "title": "The Stale Address",
+    "difficulty": "Intermediate",
+    "topic": "DNS",
+    "description": "The DNS record is stale.",
+    "symptom": "Hostname resolves but application is unreachable.",
+    "topology": "PC1 \u2500 R1 \u2500 DNS \u2500 Web Server",
+    "device": "DNS Server",
+    "hidden_fault": "A record points to old 10.10.20.9.",
+    "root_cause": "The DNS record is stale.",
+    "expected_evidence": [
+      "A record points to old 10",
+      "The"
+    ],
+    "expected_commands": [
+      "nslookup server.example.local"
+    ],
+    "expected_fix_keywords": [
+      "10.10.20.10"
+    ],
+    "verification_command": "nslookup server.example.local",
+    "learning_objective": "Learn how to systematically troubleshoot dns failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the dns layer instead of changing configuration immediately.",
+      "Use `nslookup server.example.local` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "mix_02",
+    "title": "The Red Herring",
+    "difficulty": "Intermediate",
+    "topic": "Mixed",
+    "description": "Lower-layer IP failure makes DNS a misleading symptom.",
+    "symptom": "Hostname and server IP both fail.",
+    "topology": "PC1 \u2500 R1 \u2500 R2 \u2500 Server",
+    "device": "R1",
+    "hidden_fault": "Route to server network is missing.",
+    "root_cause": "Lower-layer IP failure makes DNS a misleading symptom.",
+    "expected_evidence": [
+      "Route to server network is missing",
+      "Lower-layer"
+    ],
+    "expected_commands": [
+      "show ip route"
+    ],
+    "expected_fix_keywords": [
+      "ip route 10.10.20.0"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot mixed failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the mixed layer instead of changing configuration immediately.",
+      "Use `show ip route` to collect evidence before applying a fix."
+    ]
+  },
+  {
+    "id": "mix_03",
+    "title": "The Chain Reaction",
+    "difficulty": "Intermediate",
+    "topic": "Mixed",
+    "description": "One infrastructure failure creates many downstream symptoms.",
+    "symptom": "Several remote services fail together.",
+    "topology": "PC1 \u2500 R1 \u2550\u2550\u2550 R2 \u2500 Server",
+    "device": "R1",
+    "hidden_fault": "Inter-router interface is shut down.",
+    "root_cause": "One infrastructure failure creates many downstream symptoms.",
+    "expected_evidence": [
+      "Inter-router interface is shut down",
+      "One"
+    ],
+    "expected_commands": [
+      "show ip interface brief"
+    ],
+    "expected_fix_keywords": [
+      "no shutdown"
+    ],
+    "verification_command": "ping 10.10.20.10",
+    "learning_objective": "Learn how to systematically troubleshoot mixed failures.",
+    "hints": [
+      "Start by proving where the connectivity path works and where it fails.",
+      "Investigate the mixed layer instead of changing configuration immediately.",
+      "Use `show ip interface brief` to collect evidence before applying a fix."
+    ]
+  }
+]
