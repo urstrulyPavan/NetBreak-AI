@@ -33,9 +33,3 @@ streamlit run app.py
 ```
 
 The application remains usable without Gemini using local deterministic coaching.
-
-## Security before submission
-1. Keep `.env` outside the submission or confirm it is excluded.
-2. Never hard-code the Gemini key in source.
-3. Do not include `.venv`, caches, credentials, or personal files.
-4. Inspect the ZIP before upload.
